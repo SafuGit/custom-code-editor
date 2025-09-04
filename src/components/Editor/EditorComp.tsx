@@ -10,7 +10,7 @@ const EditorComp = () => {
   const themes = ["vs", "vs-dark", "hc-black"];
 
   return (
-    <div className='h-full'>
+    <div className='h-[95%]'>
       <div className={clsx("flex gap-4 p-2 bg-gray-800 text-white")}>
         <div>
           <label>Language:</label>
