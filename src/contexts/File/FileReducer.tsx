@@ -77,3 +77,5 @@ function fileReducer(state: FileState, action: FileAction): FileState {
   }
 }
 
+export { fileReducer };
+export type { FileAction, FileState, FileNode, OpenedFile };

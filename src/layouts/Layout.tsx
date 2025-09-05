@@ -2,6 +2,7 @@ import GridLayout from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import EditorComp from "../components/Editor/EditorComp";
+import Toolbar from "../components/Toolbar/Toolbar";
 
 const Layout = () => {
   const layout = [
@@ -21,8 +22,9 @@ const Layout = () => {
       width={1200}
       draggableHandle=".draggable"
     >
-      <div key="toolbar" className="bg-gray-800 text-white draggable">
+      <div key="toolbar" className="bg-gray-800 text-white draggable flex gap-2 p-1">
         <h1>Toolbar</h1>
+        <Toolbar />
       </div>
       <div key="fileExplorer" className="bg-gray-200 p-2">
         File Explorer
