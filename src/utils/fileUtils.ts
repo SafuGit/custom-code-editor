@@ -1,4 +1,4 @@
-import { path } from "@tauri-apps/api";
+// import { path } from "@tauri-apps/api";
 import { exists, stat } from "@tauri-apps/plugin-fs";
 import langMap from "lang-map";
 
@@ -23,11 +23,10 @@ async function getLastModified(filePath: string) {
   return info.mtime || new Date();
 }
 
-async function getFileLanguage(filePath: string) {
-  await exists(filePath);
-
-  const ext = path.extname(filePath);
-  const langs = await langMap.languages(ext.toString());
+function getFileLanguage(filePath: string) {
+  const ext = filePath.split(".").pop();
+  if (!ext) return "plaintext";
+  const langs = langMap.languages(ext.toString());
   if (langs!.length > 1) {
     return langs![0];
   } else {

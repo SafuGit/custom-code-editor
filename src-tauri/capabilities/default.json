@@ -9,6 +9,12 @@
     "core:default",
     "opener:default",
     "dialog:default",
-    "fs:default"
+    "fs:allow-stat",
+    "fs:allow-read",
+    "fs:allow-write",
+    "fs:allow-create",
+    "fs:allow-remove",
+    "fs:allow-rename",
+    "fs:allow-exists"
   ]
 }

@@ -42,6 +42,7 @@ function fileReducer(state: FileState, action: FileAction): FileState {
     default:
       return state;
     case "OPEN_FILE": {
+      console.log("Opening file:", action.payload.file);
       const { file } = action.payload;
 
       const alreadyOpened = state.openedFiles.some(f => f.id === file.id);

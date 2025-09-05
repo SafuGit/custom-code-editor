@@ -1,11 +1,11 @@
 import { open } from "@tauri-apps/plugin-dialog";
 import { useContext } from "react";
 import { FileContext } from "../../contexts/File/FileContext";
-import { FileNode, OpenedFile } from "../../contexts/File/FileReducer";
+import { OpenedFile } from "../../contexts/File/FileReducer";
 import { createFileId, getFileLanguage, getFileName, getLastModified } from "../../utils/fileUtils";
 
 const Toolbar = () => {
-  const { dispatch } = useContext(FileContext)!;
+  const { state, dispatch } = useContext(FileContext)!;
   const handleOpenFile = async () => {
     const file = await open({
       multiple: false,
@@ -15,12 +15,14 @@ const Toolbar = () => {
       id: await createFileId(file!),
       name: await getFileName(file!),
       path: file!,
-      language: await getFileLanguage(file!),
+      language: getFileLanguage(file!),
       value: "",
       isDirty: false,
       lastModified: await getLastModified(file!),
     }
     dispatch({ type: "OPEN_FILE", payload: { file: fileNode }});
+
+    console.log("Current opened files:", state.openedFiles);
   }
   return (
     <div className='flex gap-2'>
