@@ -53,6 +53,27 @@ function fileReducer(state: FileState, action: FileAction): FileState {
         selectedFileId: file.id,
       };
     }
+    case "CLOSE_FILE": {
+      const { id } = action.payload;
+
+      const openedFile = state.openedFiles.find(f => f.id === id);
+      const activeFile = state.openedFiles.find(f => f.id === state.activeFileId);
+      const newOpenedFiles = state.openedFiles.filter(f => f.id !== id);
+
+      if (!openedFile) return state;
+      if (activeFile) {
+        return {
+          ...state,
+          openedFiles: newOpenedFiles,
+          activeFileId: activeFile.id === id ? (newOpenedFiles[newOpenedFiles.length - 1]?.id || null) : state.activeFileId,
+        }
+      }
+
+      return {
+        ...state,
+        openedFiles: newOpenedFiles,
+      }
+    }
   }
 }
 
