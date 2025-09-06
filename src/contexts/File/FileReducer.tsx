@@ -38,7 +38,8 @@ type FileAction =
   | { type: "TOGGLE_FOLDER"; payload: { id: string } }
   | { type: "SELECT_NODE"; payload: { id: string | null } }
   | { type: "OPEN_FOLDER"; payload: { id: string } }
-  | { type: "CLOSE_FOLDER"; payload: { id: string } };
+  | { type: "CLOSE_FOLDER"; payload: { id: string } }
+  | { type: "SET_TREE"; payload: { tree: FileNode[] } };
 
 function fileReducer(state: FileState, action: FileAction): FileState {
   switch (action.type) {
@@ -95,6 +96,16 @@ function fileReducer(state: FileState, action: FileAction): FileState {
         ...state,
         openedFolderId: id,
       };
+    };
+    case "SET_TREE": {
+      const { tree } = action.payload;
+
+      return {
+        ...state,
+        tree,
+        selectedFileId: null,
+        activeFileId: null,
+      }
     }
   }
 }

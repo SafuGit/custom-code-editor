@@ -39,6 +39,8 @@ const EditorComp = () => {
     dispatch({ type: "SET_ACTIVE_FILE", payload: { id: fileId } });
   }
 
+  console.log(state);
+
   return (
     <div className='h-[95%]'>
       <div className={clsx("flex gap-4 p-2 bg-gray-800 text-white")}>
