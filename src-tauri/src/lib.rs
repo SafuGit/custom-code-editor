@@ -15,7 +15,7 @@ pub struct FileNode {
 }
 
 #[tauri::command]
-fn scan_folder(path: &str) -> Result<Vec<FileNode>, String> {
+fn scan_folder(path: &str) -> Result<FileNode, String> {
     let dir_path = Path::new(path);
 
     if !dir_path.exists() {
@@ -48,7 +48,13 @@ fn scan_folder(path: &str) -> Result<Vec<FileNode>, String> {
         nodes
     }
 
-    Ok(scan(dir_path))
+    let root = FileNode {
+        path: dir_path.to_string_lossy().to_string(),
+        r#type: "folder".to_string(),
+        children: scan(dir_path),
+    };
+
+    Ok(root)
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]

@@ -10,7 +10,7 @@ export const FileContext = createContext<FileContextType | undefined>(undefined)
 
 export function FileProvider({ children }: { children: React.ReactNode }) {
   const initialState: FileState = {
-    tree: [],
+    tree: null,
     openedFiles: [],
     activeFileId: null,
     expandedFolders: [],
