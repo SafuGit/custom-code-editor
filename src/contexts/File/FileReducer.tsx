@@ -74,7 +74,16 @@ function fileReducer(state: FileState, action: FileAction): FileState {
         ...state,
         openedFiles: newOpenedFiles,
       }
-    }
+    };
+    case "SET_ACTIVE_FILE": {
+      const { id } = action.payload;
+
+      return {
+        ...state,
+        activeFileId: id,
+        selectedFileId: id,
+      }
+    };
   }
 }
 
