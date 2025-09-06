@@ -15,7 +15,7 @@ pub struct FileNode {
 }
 
 #[tauri::command]
-pub fn scan_folder(path: &str) -> Result<Vec<FileNode>, String> {
+fn scan_folder(path: &str) -> Result<Vec<FileNode>, String> {
     let dir_path = Path::new(path);
 
     if !dir_path.exists() {
