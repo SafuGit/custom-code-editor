@@ -26,6 +26,12 @@ type FileState = {
   openedFolderId?: string | null;
 }
 
+type FileDTO = {
+    path: string,
+    type: "file" | "folder",
+    children?: FileNode[] | null,
+}
+
 type FileAction =
   | { type: "CREATE_FILE"; payload: { parentId: string; file: FileNode } }
   | { type: "CREATE_FOLDER"; payload: { parentId: string; folder: FileNode } }
@@ -111,4 +117,4 @@ function fileReducer(state: FileState, action: FileAction): FileState {
 }
 
 export { fileReducer };
-export type { FileAction, FileState, FileNode, OpenedFile };
+export type { FileAction, FileState, FileNode, OpenedFile, FileDTO };

@@ -3,6 +3,7 @@ import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import EditorComp from "../components/Editor/EditorComp";
 import Toolbar from "../components/Toolbar/Toolbar";
+import FileExplorer from "../components/FileExplorer/FileExplorer";
 
 const Layout = () => {
   const layout = [
@@ -28,6 +29,7 @@ const Layout = () => {
       </div>
       <div key="fileExplorer" className="bg-gray-200 p-2">
         File Explorer
+        <FileExplorer />
       </div>
       <div key="editor" className="bg-white p-2">
         <EditorComp />

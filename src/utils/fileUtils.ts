@@ -10,7 +10,7 @@ async function createFileId(filePath: string) {
   await exists(filePath);
 
   const info = await stat(filePath);
-  return `${filePath}-${info.size}-${new Date().getTime()}`;
+  return `${filePath}>${info.size}>${new Date().getTime()}`;
 }
 
 async function getFileName(filePath: string) {
