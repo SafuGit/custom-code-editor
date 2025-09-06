@@ -18,7 +18,7 @@
     "@tauri-apps/plugin-opener": "^2",
     "clsx": "^2.1.1",
     "fs": "^0.0.1-security",
-    "lang-map": "^0.4.0",
+    "language-map": "^1.5.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-grid-layout": "^1.5.2",

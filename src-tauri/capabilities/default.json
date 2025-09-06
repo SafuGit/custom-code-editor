@@ -15,6 +15,10 @@
     "fs:allow-create",
     "fs:allow-remove",
     "fs:allow-rename",
-    "fs:allow-exists"
+    "fs:allow-exists",
+    "fs:allow-read-text-file",
+    "fs:allow-write-text-file",
+    "fs:allow-read-file",
+    "fs:allow-read-dir"
   ]
 }
