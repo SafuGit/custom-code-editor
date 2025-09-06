@@ -10,7 +10,7 @@ const EditorComp = () => {
   const [theme, setTheme] = useState("vs-dark");
   const [activeFile, setActiveFile] = useState<string | null>(null);
   const [activeFileContent, setActiveFileContent] = useState<string>("");
-  const { state } = useContext(FileContext)!;
+  const { state, dispatch } = useContext(FileContext)!;
 
   const languages = getAllLanguages();
   const themes = ["vs", "vs-dark", "hc-black"];
@@ -30,6 +30,10 @@ const EditorComp = () => {
       }
     }
   }, [state.openedFiles, state.activeFileId]);
+
+  const handleCloseFile = (fileId: string) => {
+    dispatch({ type: "CLOSE_FILE", payload: { id: fileId } });
+  }
 
   return (
     <div className='h-[95%]'>
@@ -59,6 +63,14 @@ const EditorComp = () => {
             ))}
           </select>
         </div>
+      </div>
+      <div className='flex gap-2 p-2 bg-gray-800 text-black'>
+        {state.openedFiles.map(file => (
+          <div key={file.id} className={clsx("hover:cursor-pointer p-2 rounded bg-gray-200 flex gap-2", { "bg-gray-300 border-2 border-green-600": file.id === activeFile })}>
+            {file.name} 
+            <button className='bg-black text-white hover:cursor-pointer' onClick={() => handleCloseFile(file.id)}> Close </button>
+          </div>
+        ))}
       </div>
       <Editor
         language={language}
