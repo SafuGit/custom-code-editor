@@ -1,7 +1,7 @@
 import { open } from "@tauri-apps/plugin-dialog";
 import { useContext } from "react";
 import { FileContext } from "../../contexts/File/FileContext";
-import { OpenedFile } from "../../contexts/File/FileReducer";
+import { FileNode, OpenedFile } from "../../contexts/File/FileReducer";
 import { createFileId, getFileLanguage, getFileName, getLastModified } from "../../utils/fileUtils";
 
 const Toolbar = () => {
@@ -24,9 +24,28 @@ const Toolbar = () => {
 
     console.log("Current opened files:", state.openedFiles);
   }
+
+  const handleOpenFolder = async () => {
+    const folder = await open({
+      multiple: false,
+      directory: true,
+    })
+    const folderNode: FileNode = {
+      id: await createFileId(folder!),
+      name: await getFileName(folder!),
+      path: folder!,
+      type: "folder",
+      isRoot: true,
+    }
+    dispatch({ type: "OPEN_FOLDER", payload: { id: folderNode.id } });
+
+    console.log("Current opened folder:", folderNode);
+  }
+
   return (
     <div className='flex gap-2'>
       <button onClick={handleOpenFile} className="bg-white text-black">Open File</button>
+      <button onClick={handleOpenFolder} className="bg-white text-black">Open Folder</button>
     </div>
   );
 };

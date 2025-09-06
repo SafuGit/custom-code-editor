@@ -23,6 +23,7 @@ type FileState = {
   activeFileId: string | null;
   expandedFolders: string[];
   selectedFileId: string | null;
+  openedFolderId?: string | null;
 }
 
 type FileAction =
@@ -35,7 +36,9 @@ type FileAction =
   | { type: "SET_ACTIVE_FILE"; payload: { id: string | null } }
   | { type: "UPDATE_FILE_CONTENT"; payload: { id: string; value: string } }
   | { type: "TOGGLE_FOLDER"; payload: { id: string } }
-  | { type: "SELECT_NODE"; payload: { id: string | null } };
+  | { type: "SELECT_NODE"; payload: { id: string | null } }
+  | { type: "OPEN_FOLDER"; payload: { id: string } }
+  | { type: "CLOSE_FOLDER"; payload: { id: string } };
 
 function fileReducer(state: FileState, action: FileAction): FileState {
   switch (action.type) {
@@ -84,6 +87,15 @@ function fileReducer(state: FileState, action: FileAction): FileState {
         selectedFileId: id,
       }
     };
+    case "OPEN_FOLDER": {
+      const { id } = action.payload;
+      if (state.openedFolderId === id) return state;
+
+      return {
+        ...state,
+        openedFolderId: id,
+      };
+    }
   }
 }
 
